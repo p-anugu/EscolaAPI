@@ -41,6 +41,8 @@ See [docs/multidomain.md][docs/multidomain.md] for more details how to quick sta
 
 1. Clone this repo
 2. `docker compose up -d`
+3. Run `make init` to initialize the database and generate API documentation
+4. Access the Swagger API documentation at [http://api.localhost/api/documentation](http://api.localhost/api/documentation)
 
 ## Demo
 
@@ -78,6 +80,58 @@ To run use `./vendor/bin/phpunit`
 ## Tasks
 
 See [makefile](makefile) for all available devops tasks
+
+## Logging and Monitoring
+
+### Enhanced Logging System (v0.1)
+
+The API now includes comprehensive logging capabilities for debugging and monitoring:
+
+#### 1. **Caddy Access Logs**
+- Full request/response logging with URLs, methods, and status codes
+- View logs: `docker compose logs -f caddy`
+- Shows complete request paths and response times
+
+#### 2. **PHP-FPM Access Logs**
+- Detailed FastCGI request metrics including memory and CPU usage
+- Enhanced format showing request URI, response times, and resource consumption
+- View logs: `docker compose logs -f api`
+
+#### 3. **Laravel Application Logs**
+- Custom middleware logs all incoming requests with headers and authentication details
+- Daily rotating log files in `storage/logs/`
+- View logs: `docker compose exec api tail -f storage/logs/laravel-$(date +%Y-%m-%d).log`
+
+#### 4. **Environment Variables**
+- `LARAVEL_LOG_CHANNEL=stderr` - Outputs Laravel logs to Docker logs
+- `LARAVEL_APP_LOG_LEVEL=debug` - Set to debug for maximum verbosity
+
+### Viewing Logs
+
+```bash
+# All containers
+docker compose logs -f
+
+# Specific service logs
+docker compose logs -f api      # API and PHP-FPM logs
+docker compose logs -f caddy    # Web server access logs
+docker compose logs -f postgres # Database logs
+docker compose logs -f redis    # Cache logs
+
+# Laravel application logs
+docker compose exec api tail -f storage/logs/laravel-$(date +%Y-%m-%d).log
+
+# Filter logs by severity
+docker compose logs -f 2>&1 | grep -E "(ERROR|WARNING)"
+```
+
+### Default Credentials
+
+For testing and development:
+- **Email:** admin@escolalms.com
+- **Password:** secret
+
+Access API documentation at: http://api.localhost/api/documentation
 
 ## License
 

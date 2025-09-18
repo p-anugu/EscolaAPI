@@ -27,6 +27,7 @@ services:
       - LARAVEL_APP_KEY=base64:jgaCduGIEEmn4/UMJR5d38Y5ncfNE+rXqV3Fvewd37w=
       - LARAVEL_APP_DEBUG=true
       - LARAVEL_APP_LOG_LEVEL=debug
+      - LARAVEL_LOG_CHANNEL=stderr
       - LARAVEL_APP_URL=http://api.localhost
       - LARAVEL_DB_CONNECTION=pgsql
       - LARAVEL_DB_HOST=postgres

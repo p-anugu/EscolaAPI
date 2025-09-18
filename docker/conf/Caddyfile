@@ -64,18 +64,29 @@ http://*.app.localhost {
 
 
 http://*.localhost {
+    # Enable access logging
+    log {
+        output stdout
+        format console
+        level INFO
+    }
 
     # Provide Zstd and Gzip compression
     encode zstd gzip
 
-    # Enable PHP-FPM
-
+    # Enable PHP-FPM with proper FastCGI parameters
     reverse_proxy api:9000 {
         header_up -Access-Control-Allow-Origin
         header_down -Access-Control-Allow-Origin
         transport fastcgi {
-            env SCRIPT_FILENAME /var/www/html/index.php
-        }        
+            root /var/www/html/public
+            env SCRIPT_FILENAME /var/www/html/public/index.php
+            env REQUEST_URI {http.request.uri}
+            env REQUEST_METHOD {http.request.method}
+            env QUERY_STRING {http.request.uri.query}
+            env REQUEST_PATH {http.request.uri.path}
+            env SERVER_NAME {http.request.host}
+        }
     }
 
     # Cors logic 
