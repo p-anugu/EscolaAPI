@@ -1,0 +1,23 @@
+:80 {
+    # Enable access logging
+    log {
+        output stdout
+        format console
+        level INFO
+    }
+
+    # Enable compression
+    encode gzip
+
+    # Proxy to PHP-FPM via FastCGI
+    reverse_proxy escolaapi.railway.internal:9000 {
+        transport fastcgi {
+            root /var/www/html/public
+            env SCRIPT_FILENAME /var/www/html/public/index.php
+        }
+    }
+
+    # CORS headers
+    header Access-Control-Allow-Origin *
+    header Access-Control-Allow-Credentials true
+}
