@@ -1,0 +1,68 @@
+{
+  "login": {
+    "admin2@escolalms.com": {
+      "success": true,
+      "token_received": true,
+      "user_id": "2",
+      "expiry_minutes": 4.999788800875346
+    }
+  },
+  "token_validation": {},
+  "protected_endpoints": {
+    "/api/profile/me": {
+      "authenticated": true,
+      "status_code": 200,
+      "message": "My profile"
+    },
+    "/api/profile/settings": {
+      "authenticated": true,
+      "status_code": 200,
+      "message": "User settings"
+    },
+    "/api/auth/refresh": {
+      "authenticated": true,
+      "status_code": 200,
+      "message": "Token refreshed"
+    },
+    "/api/auth/logout": {
+      "authenticated": true,
+      "status_code": 200,
+      "message": "You have been successfully logged out!"
+    },
+    "/api/courses/my": {
+      "authenticated": false,
+      "status_code": 401,
+      "message": "Unauthenticated."
+    },
+    "/api/courses/progress": {
+      "authenticated": false,
+      "status_code": 401,
+      "message": "Unauthenticated."
+    },
+    "/api/admin/courses": {
+      "authenticated": false,
+      "status_code": 401,
+      "message": "Unauthenticated."
+    },
+    "/api/admin/users": {
+      "authenticated": false,
+      "status_code": 401,
+      "message": "Unauthenticated."
+    },
+    "/api/admin/categories": {
+      "authenticated": false,
+      "status_code": 401,
+      "message": "Unauthenticated."
+    },
+    "/api/admin/user-groups": {
+      "authenticated": false,
+      "status_code": 401,
+      "message": "Unauthenticated."
+    }
+  },
+  "configuration": {},
+  "summary": {
+    "working_endpoints": 4,
+    "total_endpoints": 10
+  }
+}

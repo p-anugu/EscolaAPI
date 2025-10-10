@@ -133,6 +133,16 @@ For testing and development:
 
 Access API documentation at: http://api.localhost/api/documentation
 
+### Database Management
+
+Access the database through Adminer web interface:
+- **URL:** http://localhost:8078
+- **System:** PostgreSQL
+- **Server:** postgres
+- **Username:** default
+- **Password:** secret
+- **Database:** default
+
 ## License
 
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FEscolaLMS%2FAPI.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2FEscolaLMS%2FAPI?ref=badge_large)
