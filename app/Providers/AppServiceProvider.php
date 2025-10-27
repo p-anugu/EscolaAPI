@@ -7,7 +7,9 @@ use App\Repositories\SearchableEventRepository;
 use App\Services\ConsultationService;
 use App\Services\Contracts\ConsultationServiceContract;
 use App\Services\Contracts\SearchableEventServiceContract;
+use App\Services\CustomAuthService;
 use App\Services\SearchableEventService;
+use EscolaLms\Auth\Services\Contracts\AuthServiceContract;
 use Illuminate\Database\SQLiteConnection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\ServiceProvider;
@@ -17,6 +19,7 @@ class AppServiceProvider extends ServiceProvider
     public const SERVICES = [
         SearchableEventServiceContract::class => SearchableEventService::class,
         ConsultationServiceContract::class => ConsultationService::class,
+        AuthServiceContract::class => CustomAuthService::class,
     ];
 
     public const REPOSITORIES = [
