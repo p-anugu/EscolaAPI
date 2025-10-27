@@ -175,17 +175,17 @@ services:
     #   - 8080:80
 
   minio:
-    image: bitnami/minio
+    image: minio/minio:latest
+    command: server /data --console-address ":9001"
     networks:
       - escola_lms
     # ports:
     #   - "9000:9000"
     #   - "9001:9001"
     volumes:
-      - ./docker/minio_storage:/bitnami/minio/data
+      - ./docker/minio_storage:/data
       - ./docker/conf/minio:/docker-entrypoint-initdb.d
     environment:
-      MINIO_DEFAULT_BUCKETS: "${MINIO_DEFAULT_BUCKETS:-wellms}"
       MINIO_ROOT_USER: "${MINIO_ROOT_USER:-admin}"
       MINIO_ROOT_PASSWORD: "${MINIO_ROOT_PASSWORD:-minio_secretpassword}"
       # AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}:admin
